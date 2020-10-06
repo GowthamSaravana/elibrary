@@ -29,12 +29,10 @@ router.get('/userlog',user_controller.userlogin);
 
 router.post('/user/userauth', user_controller.userpage);
 
-
+router.get('/user/search',user_controller.search);
 
 router.get('/userbooks', user_controller.userbook_list);
 
 
-
-
-
 module.exports = router;
+
