@@ -27,7 +27,7 @@ exports.userpage=function(req,res){
 
 exports.userbook_list=  function(req, res, next) {
 
-       connection.query('SELECT * FROM books ORDER BY id desc',function(err,rows)     {
+       connection.query('SELECT * FROM books ',function(err,rows)     {
 
               if(err){
                req.flash('error', err);
@@ -40,3 +40,22 @@ exports.userbook_list=  function(req, res, next) {
                });
 
 };
+
+
+exports.search = function(req, res, next) {
+  var searchtext=req.query.search;
+  connection.query('SELECT * FROM books WHERE author = ?', [searchtext],function(err,rows)     {
+
+         if(err){
+          req.flash('error', err);
+          res.redirect('/info/userbooks');
+         }else{
+
+             res.render('searchresult.ejs',{page_title:"Ebook List",data:rows});
+             console.log(rows);
+         }
+
+          });
+
+  };
+
